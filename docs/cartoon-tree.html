@@ -1,0 +1,940 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>~/.agent-os/ — cartoon tree</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Caveat:wght@600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --cream:    #F5EEDB;
+    --cream-2:  #FAF3E0;
+    --paper:    #FFFAEC;
+    --ink:      #1F1B16;
+    --ink-soft: #5C4A2A;
+
+    --gold:     #F5D17A;
+    --gold-d:   #C7901E;
+    --coral:    #F1A87C;
+    --coral-d:  #C75F2D;
+    --sage:     #A8CB9C;
+    --sage-d:   #4F6E45;
+    --rose:     #E4ADA8;
+    --rose-d:   #913F3C;
+    --lavender: #C8B6DC;
+    --lav-d:    #5C4870;
+    --teal:     #9CD3C3;
+    --teal-d:   #2E6C5E;
+    --sky:      #A6CDE5;
+    --sky-d:    #2C5777;
+    --amber:    #F2BA80;
+    --amber-d:  #8E5418;
+    --wine:     #C99088;
+    --wine-d:   #6E2A26;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background:
+      radial-gradient(circle at 0% 0%, rgba(255, 240, 200, 0.6), transparent 40%),
+      radial-gradient(circle at 100% 100%, rgba(255, 215, 180, 0.45), transparent 40%),
+      var(--cream);
+    color: var(--ink);
+    font-family: 'Fredoka', system-ui, sans-serif;
+    min-height: 100vh;
+    padding: 56px 24px 96px;
+  }
+  /* Subtle paper texture via tiny dots */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      radial-gradient(rgba(60, 40, 10, 0.07) 1px, transparent 1.4px);
+    background-size: 22px 22px;
+    opacity: 0.55;
+    z-index: 0;
+  }
+
+  .page {
+    max-width: 1040px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ============ HEADER ============ */
+  .header {
+    text-align: center;
+    margin-bottom: 56px;
+    position: relative;
+  }
+  .header .eyebrow {
+    font-family: 'Caveat', cursive;
+    font-size: 26px;
+    color: var(--ink-soft);
+    display: inline-block;
+    transform: rotate(-2.5deg);
+    margin-bottom: -2px;
+  }
+  .header h1 {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 62px;
+    font-weight: 700;
+    margin: 6px 0 14px;
+    letter-spacing: -0.02em;
+    line-height: 1.0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .h-pill {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 44px;
+    font-weight: 700;
+    background: var(--gold);
+    color: var(--ink);
+    padding: 6px 22px 8px;
+    border: 4px solid var(--ink);
+    border-radius: 16px;
+    box-shadow: 6px 6px 0 var(--ink);
+    transform: rotate(-1.5deg);
+    display: inline-block;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+  .header .sub {
+    font-size: 17px;
+    color: var(--ink-soft);
+    max-width: 680px;
+    margin: 4px auto 0;
+    line-height: 1.5;
+    font-weight: 500;
+  }
+  .header .sub b { color: var(--ink); font-weight: 700; }
+
+  /* ============ ROOT CARD ============ */
+  .root-row {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 28px;
+    padding-left: 6px;
+  }
+  .root-row .icon-wrap { flex: 0 0 64px; }
+  .root-card {
+    flex: 1;
+    background: var(--gold);
+    border: 4px solid var(--ink);
+    border-radius: 16px;
+    padding: 14px 22px 16px;
+    box-shadow: 7px 7px 0 var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transform: rotate(-0.4deg);
+  }
+  .root-card .name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+  .root-card .tag {
+    margin-left: auto;
+    font-family: 'Caveat', cursive;
+    font-size: 22px;
+    color: var(--ink-soft);
+    background: var(--cream-2);
+    padding: 2px 14px;
+    border: 3px solid var(--ink);
+    border-radius: 999px;
+    transform: rotate(2deg);
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+
+  /* ============ TREE ============ */
+  .branch {
+    position: relative;
+    padding-left: 50px;
+    margin-left: 26px;
+  }
+  /* Trunk */
+  .branch::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: -4px;
+    bottom: 36px;
+    width: 5px;
+    background: var(--ink);
+    border-radius: 3px;
+  }
+
+  .node {
+    position: relative;
+    margin: 14px 0;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  /* Horizontal elbow */
+  .node::before {
+    content: '';
+    position: absolute;
+    left: -50px;
+    top: 32px;
+    width: 50px;
+    height: 5px;
+    background: var(--ink);
+    border-radius: 3px;
+  }
+  /* Junction blob */
+  .node::after {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 25px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--ink);
+  }
+
+  /* Icon wrapper - cartoon sticker style */
+  .icon-wrap {
+    flex: 0 0 64px;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Card */
+  .card {
+    flex: 1;
+    background: var(--card-bg, var(--paper));
+    border: 3.5px solid var(--ink);
+    border-radius: 14px;
+    padding: 12px 20px;
+    box-shadow: 5px 5px 0 var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transform: rotate(var(--tilt, 0deg));
+    min-height: 56px;
+  }
+  .card .name {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+  .card .note {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 500;
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    margin-left: auto;
+    text-align: right;
+    line-height: 1.35;
+  }
+  .card .badge {
+    margin-left: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--ink);
+    background: rgba(31, 27, 22, 0.08);
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 2px solid var(--ink);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  /* Folder card variation - slightly bigger and bolder */
+  .node.folder .card {
+    padding: 14px 22px;
+    border-width: 4px;
+  }
+  .node.folder .card .name {
+    font-size: 19px;
+  }
+
+  /* Nested branch styling */
+  .branch.nested {
+    margin-top: -6px;
+    margin-left: 90px;
+    padding-left: 44px;
+  }
+  .branch.nested .node::before { left: -44px; width: 44px; }
+  .branch.nested .node::after  { top: 27px; left: -8px; width: 14px; height: 14px; }
+  .branch.nested .card { padding: 10px 18px; min-height: 50px; box-shadow: 4px 4px 0 var(--ink); }
+  .branch.nested .icon-wrap { flex: 0 0 52px; width: 52px; height: 52px; }
+  .branch.nested .card .name { font-size: 15.5px; }
+
+  /* Deep nest (level 2) */
+  .branch.deep {
+    margin-left: 80px;
+    padding-left: 40px;
+  }
+  .branch.deep::before { width: 4px; }
+  .branch.deep .node::before { left: -40px; width: 40px; height: 4px; }
+  .branch.deep .node::after  { top: 23px; width: 12px; height: 12px; left: -7px; }
+  .branch.deep .card { padding: 8px 16px; min-height: 44px; box-shadow: 3px 3px 0 var(--ink); border-width: 3px; }
+  .branch.deep .icon-wrap { flex: 0 0 42px; width: 42px; height: 42px; }
+  .branch.deep .card .name { font-size: 14px; }
+
+  /* ============ ANNOTATIONS (Caveat callouts) ============ */
+  /* Sticker-tags peeking from the top of cards, anchored INSIDE the page bounds. */
+  .callout {
+    position: absolute;
+    font-family: 'Caveat', cursive;
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--ink);
+    pointer-events: none;
+    line-height: 1.1;
+    background: var(--cream-2);
+    padding: 1px 12px 3px;
+    border: 2.5px solid var(--ink);
+    border-radius: 999px;
+    box-shadow: 3px 3px 0 var(--ink);
+    white-space: nowrap;
+    z-index: 2;
+  }
+  .callout .arrow {
+    display: inline-block;
+  }
+
+  /* All callouts: peek out of top-right of their parent node */
+  .callout-boss   { right: 14px;  top: -18px; transform: rotate(-4deg); color: var(--coral-d); background: #FFE9B3; }
+  .callout-tick   { right: 14px;  top: -18px; transform: rotate(3deg);  color: var(--teal-d);  background: #C8B6DC; }
+  .callout-safety { right: 14px;  top: -18px; transform: rotate(-3deg); color: var(--lav-d);   background: #E6D6F0; }
+  .callout-shh    { right: 14px;  top: -18px; transform: rotate(4deg);  color: var(--wine-d);  background: #F5DAD7; }
+
+  /* ============ FOOTER ============ */
+  .footer {
+    margin-top: 56px;
+    text-align: center;
+    font-family: 'Caveat', cursive;
+    font-size: 22px;
+    color: var(--ink-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+  }
+  .footer .stamp {
+    background: var(--cream-2);
+    border: 3px solid var(--ink);
+    border-radius: 10px;
+    padding: 4px 14px;
+    box-shadow: 4px 4px 0 var(--ink);
+    transform: rotate(-2deg);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .footer .stamp.b { transform: rotate(2deg); background: var(--gold); }
+
+  /* Container for the agents node + its callout */
+  .with-callout { position: relative; }
+</style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- ============ HEADER ============ -->
+    <div class="header">
+      <div class="eyebrow">a tour of</div>
+      <h1>
+        <span>my</span>
+        <span class="h-pill">~/.agent-os/</span>
+      </h1>
+      <div class="sub">
+        <b>66+ files.</b> One brain at the top, a handful of agents that run themselves, hooks that keep me from doing anything dumb.
+      </div>
+    </div>
+
+    <!-- ============ ROOT NODE ============ -->
+    <div class="root-row">
+      <div class="icon-wrap">
+        <!-- big home folder icon -->
+        <svg viewBox="0 0 64 64" width="64" height="64">
+          <g transform="translate(2,3)">
+            <path d="M4 24 L24 24 L30 18 L56 18 L56 28 L4 28 Z" fill="#1F1B16" opacity="0.35"/>
+            <rect x="4" y="24" width="52" height="30" rx="5" fill="#1F1B16" opacity="0.35"/>
+          </g>
+          <path d="M4 24 L24 24 L30 18 L56 18 L56 28 L4 28 Z" fill="#F5D17A" stroke="#1F1B16" stroke-width="3.5" stroke-linejoin="round"/>
+          <rect x="4" y="24" width="52" height="30" rx="5" fill="#F5D17A" stroke="#1F1B16" stroke-width="3.5"/>
+          <path d="M14 38 L20 32 L26 38 L26 46 L14 46 Z" fill="#F5EEDB" stroke="#1F1B16" stroke-width="2.5" stroke-linejoin="round"/>
+          <rect x="18" y="40" width="4" height="6" fill="#1F1B16"/>
+        </svg>
+      </div>
+      <div class="root-card">
+        <div class="name">~/.agent-os/</div>
+        <div class="tag">the home folder</div>
+      </div>
+    </div>
+
+    <!-- ============ TREE ============ -->
+    <div class="branch">
+
+      <!-- CLAUDE.md (with callout) -->
+      <div class="node with-callout" style="--card-bg: #FFE9B3; --tilt: -0.6deg;">
+        <div class="icon-wrap">
+          <!-- brain document -->
+          <svg viewBox="0 0 64 64" width="56" height="56">
+            <g transform="translate(2,3)">
+              <path d="M10 6 L40 6 L52 18 L52 56 L10 56 Z" fill="#1F1B16" opacity="0.3"/>
+            </g>
+            <path d="M10 6 L40 6 L52 18 L52 56 L10 56 Z" fill="#FFE9B3" stroke="#1F1B16" stroke-width="3.5" stroke-linejoin="round"/>
+            <path d="M40 6 L40 18 L52 18" fill="none" stroke="#1F1B16" stroke-width="3.5" stroke-linejoin="round"/>
+            <!-- Tiny brain drawing inside -->
+            <g transform="translate(31,34)">
+              <path d="M -8 -2 Q -10 -8 -4 -10 Q 0 -12 4 -10 Q 10 -8 8 -2 Q 10 4 4 6 Q 0 8 -4 6 Q -10 4 -8 -2 Z"
+                    fill="#F1A87C" stroke="#1F1B16" stroke-width="2.5" stroke-linejoin="round"/>
+              <path d="M 0 -8 L 0 6 M -6 -2 Q -3 -2 0 -4 M 6 -2 Q 3 -2 0 -4"
+                    fill="none" stroke="#1F1B16" stroke-width="2" stroke-linecap="round"/>
+            </g>
+            <line x1="18" y1="14" x2="34" y2="14" stroke="#1F1B16" stroke-width="2.2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="card">
+          <div class="name">CLAUDE.md</div>
+          <div class="note">Routing brain — intent&nbsp;→&nbsp;skill / persona / agent</div>
+        </div>
+        <div class="callout callout-boss">
+          ← the boss
+        </div>
+      </div>
+
+      <!-- BRAND.md -->
+      <div class="node" style="--card-bg: #E6D6F0; --tilt: 0.4deg;">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 64 64" width="56" height="56">
+            <path d="M10 6 L40 6 L52 18 L52 56 L10 56 Z" fill="#E6D6F0" stroke="#1F1B16" stroke-width="3.5" stroke-linejoin="round"/>
+            <path d="M40 6 L40 18 L52 18" fill="none" stroke="#1F1B16" stroke-width="3.5" stroke-linejoin="round"/>
+            <!-- 12 dots (sections) -->
+            <g fill="#5C4870">
+              <circle cx="20" cy="28" r="2"/><circle cx="28" cy="28" r="2"/><circle cx="36" cy="28" r="2"/><circle cx="44" cy="28" r="2"/>
+              <circle cx="20" cy="36" r="2"/><circle cx="28" cy="36" r="2"/><circle cx="36" cy="36" r="2"/><circle cx="44" cy="36" r="2"/>
+              <circle cx="20" cy="44" r="2"/><circle cx="28" cy="44" r="2"/><circle cx="36" cy="44" r="2"/><circle cx="44" cy="44" r="2"/>
+            </g>
+          </svg>
+        </div>
+        <div class="card">
+          <div class="name">BRAND.md</div>
+          <div class="note">Positioning — 12 canonical sections</div>
+        </div>
+      </div>
+
+      <!-- SOUL.md -->
+      <div class="node" style="--card-bg: #F1D4E0; --tilt: -0.5deg;">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 64 64" width="56" height="56">
+            <path d="M10 6 L40 6 L52 18 L52 56 L10 56 Z" fill="#F1D4E0" stroke="#1F1B16" stroke-width="3.5" stroke-linejoin="round"/>
+            <path d="M40 6 L40 18 L52 18" fill="none" stroke="#1F1B16" stroke-width="3.5" stroke-linejoin="round"/>
+            <!-- speech bubble -->
+            <path d="M16 26 L42 26 L42 40 L28 40 L22 46 L24 40 L16 40 Z"
+                  fill="#F5EEDB" stroke="#1F1B16" stroke-width="2.5" stroke-linejoin="round"/>
+            <circle cx="24" cy="33" r="1.8" fill="#1F1B16"/>
+            <circle cx="30" cy="33" r="1.8" fill="#1F1B16"/>
+            <circle cx="36" cy="33" r="1.8" fill="#1F1B16"/>
+          </svg>
+        </div>
+        <div class="card">
+          <div class="name">SOUL.md</div>
+          <div class="note">Voice reference</div>
+        </div>
+      </div>
+
+      <!-- MEMORY.md -->
+      <div class="node" style="--card-bg: #F5DAD7; --tilt: 0.3deg;">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 64 64" width="56" height="56">
+            <path d="M10 6 L40 6 L52 18 L52 56 L10 56 Z" fill="#F5DAD7" stroke="#1F1B16" stroke-width="3.5" stroke-linejoin="round"/>
+            <path d="M40 6 L40 18 L52 18" fill="none" stroke="#1F1B16" stroke-width="3.5" stroke-linejoin="round"/>
+            <!-- pages stack -->
+            <line x1="18" y1="26" x2="44" y2="26" stroke="#1F1B16" stroke-width="2.2" stroke-linecap="round"/>
+            <line x1="18" y1="32" x2="44" y2="32" stroke="#1F1B16" stroke-width="2.2" stroke-linecap="round"/>
+            <line x1="18" y1="38" x2="38" y2="38" stroke="#1F1B16" stroke-width="2.2" stroke-linecap="round"/>
+            <!-- plus sign (append-only) -->
+            <circle cx="44" cy="46" r="6" fill="#913F3C" stroke="#1F1B16" stroke-width="2.5"/>
+            <path d="M44 43 L44 49 M41 46 L47 46" stroke="#F5EEDB" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="card">
+          <div class="name">MEMORY.md</div>
+          <div class="note">Append-only campaign log <span style="opacity:0.6">(gitignored)</span></div>
+        </div>
+      </div>
+
+      <!-- CONNECTIONS.md -->
+      <div class="node" style="--card-bg: #E6D6F0; --tilt: -0.4deg;">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 64 64" width="56" height="56">
+            <path d="M10 6 L40 6 L52 18 L52 56 L10 56 Z" fill="#E6D6F0" stroke="#1F1B16" stroke-width="3.5" stroke-linejoin="round"/>
+            <path d="M40 6 L40 18 L52 18" fill="none" stroke="#1F1B16" stroke-width="3.5" stroke-linejoin="round"/>
+            <!-- two connected nodes -->
+            <circle cx="22" cy="36" r="4" fill="#5C4870" stroke="#1F1B16" stroke-width="2.5"/>
+            <circle cx="42" cy="36" r="4" fill="#5C4870" stroke="#1F1B16" stroke-width="2.5"/>
+            <line x1="26" y1="36" x2="38" y2="36" stroke="#1F1B16" stroke-width="2.5" stroke-linecap="round"/>
+            <!-- gate / boundary -->
+            <line x1="32" y1="28" x2="32" y2="44" stroke="#913F3C" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="2,2"/>
+          </svg>
+        </div>
+        <div class="card">
+          <div class="name">CONNECTIONS.md</div>
+          <div class="note">Auth-boundary rules</div>
+        </div>
+      </div>
+
+      <!-- settings.json -->
+      <div class="node" style="--card-bg: #F8DDBB; --tilt: 0.5deg;">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 64 64" width="56" height="56">
+            <!-- gear -->
+            <g transform="translate(32,34)">
+              <g stroke="#1F1B16" stroke-width="3" stroke-linecap="round" fill="#F8DDBB">
+                <rect x="-3" y="-22" width="6" height="8" rx="1.5"/>
+                <rect x="-3" y="14" width="6" height="8" rx="1.5"/>
+                <rect x="-22" y="-3" width="8" height="6" rx="1.5"/>
+                <rect x="14" y="-3" width="8" height="6" rx="1.5"/>
+                <rect x="-3" y="-22" width="6" height="8" rx="1.5" transform="rotate(45)"/>
+                <rect x="-3" y="-22" width="6" height="8" rx="1.5" transform="rotate(-45)"/>
+                <rect x="-3" y="14" width="6" height="8" rx="1.5" transform="rotate(45)"/>
+                <rect x="-3" y="14" width="6" height="8" rx="1.5" transform="rotate(-45)"/>
+              </g>
+              <circle r="11" fill="#F8DDBB" stroke="#1F1B16" stroke-width="3"/>
+              <circle r="4" fill="#1F1B16"/>
+            </g>
+          </svg>
+        </div>
+        <div class="card">
+          <div class="name">settings.json</div>
+          <div class="note">Permissions, hooks, model defaults</div>
+        </div>
+      </div>
+
+      <!-- ============ AGENTS FOLDER ============ -->
+      <div class="node folder with-callout" style="--card-bg: #F8B98D; --tilt: -0.5deg;">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 64 64" width="60" height="60">
+            <g transform="translate(2,3)">
+              <path d="M4 22 L24 22 L30 16 L56 16 L56 26 L4 26 Z" fill="#1F1B16" opacity="0.3"/>
+              <rect x="4" y="22" width="52" height="32" rx="5" fill="#1F1B16" opacity="0.3"/>
+            </g>
+            <path d="M4 22 L24 22 L30 16 L56 16 L56 26 L4 26 Z" fill="#F1A87C" stroke="#1F1B16" stroke-width="3.5" stroke-linejoin="round"/>
+            <rect x="4" y="22" width="52" height="32" rx="5" fill="#F8B98D" stroke="#1F1B16" stroke-width="3.5"/>
+            <!-- robot head peeking -->
+            <rect x="22" y="32" width="20" height="16" rx="3" fill="#F5EEDB" stroke="#1F1B16" stroke-width="2.5"/>
+            <circle cx="28" cy="40" r="2.4" fill="#1F1B16"/>
+            <circle cx="36" cy="40" r="2.4" fill="#1F1B16"/>
+            <line x1="32" y1="28" x2="32" y2="32" stroke="#1F1B16" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="32" cy="27" r="2" fill="#C75F2D" stroke="#1F1B16" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="card">
+          <div class="name">agents/</div>
+          <div class="badge">4 + personas</div>
+        </div>
+        <div class="callout callout-tick">
+          they run themselves <span style="font-size:24px;">↻</span>
+        </div>
+      </div>
+
+      <!-- ============ AGENTS NESTED ============ -->
+      <div class="branch nested">
+
+        <!-- brand-auditor.md -->
+        <div class="node" style="--card-bg: #FFE9B3; --tilt: 0.4deg;">
+          <div class="icon-wrap">
+            <svg viewBox="0 0 56 56" width="48" height="48">
+              <path d="M8 6 L34 6 L46 18 L46 50 L8 50 Z" fill="#FFE9B3" stroke="#1F1B16" stroke-width="3" stroke-linejoin="round"/>
+              <path d="M34 6 L34 18 L46 18" fill="none" stroke="#1F1B16" stroke-width="3" stroke-linejoin="round"/>
+              <!-- magnifying glass -->
+              <circle cx="24" cy="30" r="6.5" fill="none" stroke="#1F1B16" stroke-width="2.5"/>
+              <line x1="29" y1="35" x2="36" y2="42" stroke="#1F1B16" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="card">
+            <div class="name">brand-auditor.md</div>
+            <div class="note">Audits BRAND.md for gaps</div>
+          </div>
+        </div>
+
+        <!-- reply-handler.md -->
+        <div class="node" style="--card-bg: #F8B98D; --tilt: -0.3deg;">
+          <div class="icon-wrap">
+            <svg viewBox="0 0 56 56" width="48" height="48">
+              <path d="M8 6 L34 6 L46 18 L46 50 L8 50 Z" fill="#F8B98D" stroke="#1F1B16" stroke-width="3" stroke-linejoin="round"/>
+              <path d="M34 6 L34 18 L46 18" fill="none" stroke="#1F1B16" stroke-width="3" stroke-linejoin="round"/>
+              <!-- envelope -->
+              <rect x="14" y="26" width="22" height="14" rx="1.5" fill="#F5EEDB" stroke="#1F1B16" stroke-width="2.5"/>
+              <path d="M14 26 L25 34 L36 26" fill="none" stroke="#1F1B16" stroke-width="2.5" stroke-linejoin="round"/>
+              <!-- reply arrow -->
+              <path d="M28 42 L34 42 L34 38" fill="none" stroke="#C75F2D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M28 42 L31 39 M28 42 L31 45" stroke="#C75F2D" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="card">
+            <div class="name">reply-handler.md</div>
+            <div class="note">Processes inbox replies</div>
+          </div>
+        </div>
+
+        <!-- calendar-booking.md -->
+        <div class="node" style="--card-bg: #BBDDAE; --tilt: 0.5deg;">
+          <div class="icon-wrap">
+            <svg viewBox="0 0 56 56" width="48" height="48">
+              <path d="M8 6 L34 6 L46 18 L46 50 L8 50 Z" fill="#BBDDAE" stroke="#1F1B16" stroke-width="3" stroke-linejoin="round"/>
+              <path d="M34 6 L34 18 L46 18" fill="none" stroke="#1F1B16" stroke-width="3" stroke-linejoin="round"/>
+              <!-- calendar -->
+              <rect x="14" y="26" width="22" height="18" rx="2" fill="#F5EEDB" stroke="#1F1B16" stroke-width="2.5"/>
+              <line x1="14" y1="32" x2="36" y2="32" stroke="#1F1B16" stroke-width="2.5"/>
+              <line x1="19" y1="22" x2="19" y2="28" stroke="#1F1B16" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="31" y1="22" x2="31" y2="28" stroke="#1F1B16" stroke-width="2.5" stroke-linecap="round"/>
+              <rect x="22" y="36" width="6" height="5" fill="#4F6E45"/>
+            </svg>
+          </div>
+          <div class="card">
+            <div class="name">calendar-booking.md</div>
+            <div class="note">Generates prep docs for new bookings</div>
+          </div>
+        </div>
+
+        <!-- morning-brief.md -->
+        <div class="node" style="--card-bg: #F5DAD7; --tilt: -0.4deg;">
+          <div class="icon-wrap">
+            <svg viewBox="0 0 56 56" width="48" height="48">
+              <path d="M8 6 L34 6 L46 18 L46 50 L8 50 Z" fill="#F5DAD7" stroke="#1F1B16" stroke-width="3" stroke-linejoin="round"/>
+              <path d="M34 6 L34 18 L46 18" fill="none" stroke="#1F1B16" stroke-width="3" stroke-linejoin="round"/>
+              <!-- sunrise -->
+              <line x1="14" y1="40" x2="40" y2="40" stroke="#1F1B16" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M19 40 A 8 8 0 0 1 35 40 Z" fill="#F1A87C" stroke="#1F1B16" stroke-width="2.5" stroke-linejoin="round"/>
+              <g stroke="#913F3C" stroke-width="2" stroke-linecap="round">
+                <line x1="27" y1="22" x2="27" y2="28"/>
+                <line x1="16" y1="28" x2="20" y2="30"/>
+                <line x1="38" y1="28" x2="34" y2="30"/>
+              </g>
+            </svg>
+          </div>
+          <div class="card">
+            <div class="name">morning-brief.md</div>
+            <div class="note">Mon–Fri 7&nbsp;AM priority memo</div>
+          </div>
+        </div>
+
+        <!-- personas/ folder -->
+        <div class="node folder" style="--card-bg: #BCD7E9; --tilt: 0.3deg;">
+          <div class="icon-wrap">
+            <svg viewBox="0 0 56 56" width="52" height="52">
+              <path d="M4 18 L20 18 L26 14 L48 14 L48 22 L4 22 Z" fill="#7AAACA" stroke="#1F1B16" stroke-width="3" stroke-linejoin="round"/>
+              <rect x="4" y="18" width="44" height="28" rx="4" fill="#BCD7E9" stroke="#1F1B16" stroke-width="3"/>
+              <!-- 3 little face masks -->
+              <circle cx="16" cy="32" r="4" fill="#F5EEDB" stroke="#1F1B16" stroke-width="2"/>
+              <circle cx="26" cy="32" r="4" fill="#F5EEDB" stroke="#1F1B16" stroke-width="2"/>
+              <circle cx="36" cy="32" r="4" fill="#F5EEDB" stroke="#1F1B16" stroke-width="2"/>
+              <circle cx="15" cy="31" r="0.8" fill="#1F1B16"/><circle cx="17" cy="31" r="0.8" fill="#1F1B16"/>
+              <circle cx="25" cy="31" r="0.8" fill="#1F1B16"/><circle cx="27" cy="31" r="0.8" fill="#1F1B16"/>
+              <circle cx="35" cy="31" r="0.8" fill="#1F1B16"/><circle cx="37" cy="31" r="0.8" fill="#1F1B16"/>
+            </svg>
+          </div>
+          <div class="card">
+            <div class="name">personas/</div>
+            <div class="badge">3 roles</div>
+          </div>
+        </div>
+
+        <!-- Deep nested personas -->
+        <div class="branch deep">
+          <div class="node" style="--card-bg: #DCE9F2;">
+            <div class="icon-wrap">
+              <svg viewBox="0 0 40 40" width="36" height="36">
+                <circle cx="20" cy="16" r="6" fill="#BCD7E9" stroke="#1F1B16" stroke-width="2.5"/>
+                <path d="M8 32 Q 8 22 20 22 Q 32 22 32 32 Z" fill="#BCD7E9" stroke="#1F1B16" stroke-width="2.5" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="card">
+              <div class="name">enterprise-ae</div>
+            </div>
+          </div>
+          <div class="node" style="--card-bg: #DCE9F2;">
+            <div class="icon-wrap">
+              <svg viewBox="0 0 40 40" width="36" height="36">
+                <circle cx="20" cy="16" r="6" fill="#BCD7E9" stroke="#1F1B16" stroke-width="2.5"/>
+                <path d="M8 32 Q 8 22 20 22 Q 32 22 32 32 Z" fill="#BCD7E9" stroke="#1F1B16" stroke-width="2.5" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="card">
+              <div class="name">gtm-engineer</div>
+            </div>
+          </div>
+          <div class="node" style="--card-bg: #DCE9F2;">
+            <div class="icon-wrap">
+              <svg viewBox="0 0 40 40" width="36" height="36">
+                <circle cx="20" cy="16" r="6" fill="#BCD7E9" stroke="#1F1B16" stroke-width="2.5"/>
+                <path d="M8 32 Q 8 22 20 22 Q 32 22 32 32 Z" fill="#BCD7E9" stroke="#1F1B16" stroke-width="2.5" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="card">
+              <div class="name">solo-founder</div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /agents nested -->
+
+      <!-- ============ HOOKS FOLDER ============ -->
+      <div class="node folder with-callout" style="--card-bg: #C8B6DC; --tilt: 0.5deg;">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 64 64" width="60" height="60">
+            <g transform="translate(2,3)">
+              <path d="M32 6 L52 14 L52 30 Q52 46 32 54 Q12 46 12 30 L12 14 Z" fill="#1F1B16" opacity="0.3"/>
+            </g>
+            <path d="M32 6 L52 14 L52 30 Q52 46 32 54 Q12 46 12 30 L12 14 Z"
+                  fill="#C8B6DC" stroke="#1F1B16" stroke-width="3.5" stroke-linejoin="round"/>
+            <!-- checkmark -->
+            <path d="M22 30 L29 38 L42 22" fill="none" stroke="#1F1B16" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="card">
+          <div class="name">hooks/</div>
+          <div class="badge">3 guardrails</div>
+        </div>
+        <div class="callout callout-safety">
+          safety net <span style="font-size:24px;">↩</span>
+        </div>
+      </div>
+
+      <!-- ============ HOOKS NESTED ============ -->
+      <div class="branch nested">
+        <div class="node" style="--card-bg: #D6C5E7; --tilt: -0.3deg;">
+          <div class="icon-wrap">
+            <svg viewBox="0 0 56 56" width="48" height="48">
+              <rect x="6" y="18" width="44" height="28" rx="6" fill="#C8B6DC" stroke="#1F1B16" stroke-width="3"/>
+              <path d="M14 18 L14 10 M40 18 L40 10" stroke="#1F1B16" stroke-width="3" stroke-linecap="round"/>
+              <!-- block sign / no -->
+              <circle cx="28" cy="32" r="8" fill="#F5EEDB" stroke="#913F3C" stroke-width="3"/>
+              <line x1="22" y1="32" x2="34" y2="32" stroke="#913F3C" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="card">
+            <div class="name">pre-tool-use/</div>
+            <div class="note">Blocks dangerous commands</div>
+          </div>
+        </div>
+        <div class="node" style="--card-bg: #D6C5E7; --tilt: 0.4deg;">
+          <div class="icon-wrap">
+            <svg viewBox="0 0 56 56" width="48" height="48">
+              <rect x="6" y="18" width="44" height="28" rx="6" fill="#C8B6DC" stroke="#1F1B16" stroke-width="3"/>
+              <path d="M14 18 L14 10 M40 18 L40 10" stroke="#1F1B16" stroke-width="3" stroke-linecap="round"/>
+              <!-- git branch -->
+              <circle cx="20" cy="28" r="2.5" fill="#1F1B16"/>
+              <circle cx="20" cy="40" r="2.5" fill="#1F1B16"/>
+              <circle cx="36" cy="34" r="2.5" fill="#1F1B16"/>
+              <line x1="20" y1="30" x2="20" y2="38" stroke="#1F1B16" stroke-width="2.5"/>
+              <path d="M22 28 Q30 28 34 34" fill="none" stroke="#1F1B16" stroke-width="2.5"/>
+            </svg>
+          </div>
+          <div class="card">
+            <div class="name">post-tool-use/</div>
+            <div class="note">Auto-stages git, runs auditors</div>
+          </div>
+        </div>
+        <div class="node" style="--card-bg: #D6C5E7; --tilt: -0.4deg;">
+          <div class="icon-wrap">
+            <svg viewBox="0 0 56 56" width="48" height="48">
+              <rect x="6" y="18" width="44" height="28" rx="6" fill="#C8B6DC" stroke="#1F1B16" stroke-width="3"/>
+              <path d="M14 18 L14 10 M40 18 L40 10" stroke="#1F1B16" stroke-width="3" stroke-linecap="round"/>
+              <!-- bell -->
+              <path d="M28 24 Q22 24 22 30 L22 36 L20 38 L36 38 L34 36 L34 30 Q34 24 28 24 Z"
+                    fill="#F5EEDB" stroke="#1F1B16" stroke-width="2.5" stroke-linejoin="round"/>
+              <circle cx="28" cy="40" r="2" fill="#1F1B16"/>
+            </svg>
+          </div>
+          <div class="card">
+            <div class="name">notification/</div>
+            <div class="note">Surfaces approval requests</div>
+          </div>
+        </div>
+      </div><!-- /hooks nested -->
+
+      <!-- ============ SCRIPTS FOLDER ============ -->
+      <div class="node folder" style="--card-bg: #F2BA80; --tilt: -0.4deg;">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 64 64" width="60" height="60">
+            <g transform="translate(2,3)">
+              <path d="M4 22 L24 22 L30 16 L56 16 L56 26 L4 26 Z" fill="#1F1B16" opacity="0.3"/>
+              <rect x="4" y="22" width="52" height="32" rx="5" fill="#1F1B16" opacity="0.3"/>
+            </g>
+            <path d="M4 22 L24 22 L30 16 L56 16 L56 26 L4 26 Z" fill="#E0A360" stroke="#1F1B16" stroke-width="3.5" stroke-linejoin="round"/>
+            <rect x="4" y="22" width="52" height="32" rx="5" fill="#F2BA80" stroke="#1F1B16" stroke-width="3.5"/>
+            <!-- code chevrons -->
+            <path d="M18 36 L14 42 L18 48" fill="none" stroke="#1F1B16" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M42 36 L46 42 L42 48" fill="none" stroke="#1F1B16" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <line x1="34" y1="32" x2="26" y2="52" stroke="#1F1B16" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="card">
+          <div class="name">scripts/</div>
+          <div class="badge">6 python</div>
+        </div>
+      </div>
+
+      <!-- SCRIPTS NESTED -->
+      <div class="branch nested">
+        <div class="node" style="--card-bg: #F8DDBB; --tilt: 0.3deg;">
+          <div class="icon-wrap">
+            <svg viewBox="0 0 56 56" width="48" height="48">
+              <path d="M8 6 L34 6 L46 18 L46 50 L8 50 Z" fill="#F8DDBB" stroke="#1F1B16" stroke-width="3" stroke-linejoin="round"/>
+              <path d="M34 6 L34 18 L46 18" fill="none" stroke="#1F1B16" stroke-width="3" stroke-linejoin="round"/>
+              <text x="27" y="40" text-anchor="middle" font-family="JetBrains Mono" font-size="11" font-weight="700" fill="#8E5418">.py</text>
+            </svg>
+          </div>
+          <div class="card">
+            <div class="name">audit-brand.py</div>
+            <div class="note">Checks BRAND.md against 12 sections</div>
+          </div>
+        </div>
+        <div class="node" style="--card-bg: #F8DDBB; --tilt: -0.4deg;">
+          <div class="icon-wrap">
+            <svg viewBox="0 0 56 56" width="48" height="48">
+              <path d="M8 6 L34 6 L46 18 L46 50 L8 50 Z" fill="#F8DDBB" stroke="#1F1B16" stroke-width="3" stroke-linejoin="round"/>
+              <path d="M34 6 L34 18 L46 18" fill="none" stroke="#1F1B16" stroke-width="3" stroke-linejoin="round"/>
+              <text x="27" y="40" text-anchor="middle" font-family="JetBrains Mono" font-size="11" font-weight="700" fill="#8E5418">.py</text>
+            </svg>
+          </div>
+          <div class="card">
+            <div class="name">fetch-replies.py</div>
+            <div class="note">Polls Gmail for replies, classifies, queues</div>
+          </div>
+        </div>
+        <div class="node" style="--card-bg: #F8DDBB; --tilt: 0.4deg;">
+          <div class="icon-wrap">
+            <svg viewBox="0 0 56 56" width="48" height="48">
+              <path d="M8 6 L34 6 L46 18 L46 50 L8 50 Z" fill="#F8DDBB" stroke="#1F1B16" stroke-width="3" stroke-linejoin="round"/>
+              <path d="M34 6 L34 18 L46 18" fill="none" stroke="#1F1B16" stroke-width="3" stroke-linejoin="round"/>
+              <text x="27" y="40" text-anchor="middle" font-family="JetBrains Mono" font-size="11" font-weight="700" fill="#8E5418">.py</text>
+            </svg>
+          </div>
+          <div class="card">
+            <div class="name">fetch-bookings.py</div>
+            <div class="note">Polls Gmail for calendar invites, queues</div>
+          </div>
+        </div>
+        <div class="node" style="--card-bg: #F8DDBB; --tilt: -0.3deg;">
+          <div class="icon-wrap">
+            <svg viewBox="0 0 56 56" width="48" height="48">
+              <path d="M8 6 L34 6 L46 18 L46 50 L8 50 Z" fill="#F8DDBB" stroke="#1F1B16" stroke-width="3" stroke-linejoin="round"/>
+              <path d="M34 6 L34 18 L46 18" fill="none" stroke="#1F1B16" stroke-width="3" stroke-linejoin="round"/>
+              <text x="27" y="40" text-anchor="middle" font-family="JetBrains Mono" font-size="11" font-weight="700" fill="#8E5418">.py</text>
+            </svg>
+          </div>
+          <div class="card">
+            <div class="name">morning-brief.py</div>
+            <div class="note">Aggregates state → Gmail draft to self</div>
+          </div>
+        </div>
+        <div class="node" style="--card-bg: #F8DDBB; --tilt: 0.5deg;">
+          <div class="icon-wrap">
+            <svg viewBox="0 0 56 56" width="48" height="48">
+              <path d="M8 6 L34 6 L46 18 L46 50 L8 50 Z" fill="#F8DDBB" stroke="#1F1B16" stroke-width="3" stroke-linejoin="round"/>
+              <path d="M34 6 L34 18 L46 18" fill="none" stroke="#1F1B16" stroke-width="3" stroke-linejoin="round"/>
+              <text x="27" y="40" text-anchor="middle" font-family="JetBrains Mono" font-size="11" font-weight="700" fill="#8E5418">.py</text>
+            </svg>
+          </div>
+          <div class="card">
+            <div class="name">hunter-enrich.py</div>
+            <div class="note">Email enrichment via Hunter.io</div>
+          </div>
+        </div>
+        <div class="node" style="--card-bg: #F8DDBB; --tilt: -0.4deg;">
+          <div class="icon-wrap">
+            <svg viewBox="0 0 56 56" width="48" height="48">
+              <path d="M8 6 L34 6 L46 18 L46 50 L8 50 Z" fill="#F8DDBB" stroke="#1F1B16" stroke-width="3" stroke-linejoin="round"/>
+              <path d="M34 6 L34 18 L46 18" fill="none" stroke="#1F1B16" stroke-width="3" stroke-linejoin="round"/>
+              <text x="27" y="40" text-anchor="middle" font-family="JetBrains Mono" font-size="11" font-weight="700" fill="#8E5418">.py</text>
+            </svg>
+          </div>
+          <div class="card">
+            <div class="name">os-health.py</div>
+            <div class="note">Verifies every component is wired</div>
+          </div>
+        </div>
+      </div><!-- /scripts nested -->
+
+      <!-- ============ LAUNCHD FOLDER ============ -->
+      <div class="node folder" style="--card-bg: #B4DDD0; --tilt: 0.3deg;">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 64 64" width="60" height="60">
+            <g transform="translate(2,3)">
+              <path d="M4 22 L24 22 L30 16 L56 16 L56 26 L4 26 Z" fill="#1F1B16" opacity="0.3"/>
+              <rect x="4" y="22" width="52" height="32" rx="5" fill="#1F1B16" opacity="0.3"/>
+            </g>
+            <path d="M4 22 L24 22 L30 16 L56 16 L56 26 L4 26 Z" fill="#7BBFAF" stroke="#1F1B16" stroke-width="3.5" stroke-linejoin="round"/>
+            <rect x="4" y="22" width="52" height="32" rx="5" fill="#B4DDD0" stroke="#1F1B16" stroke-width="3.5"/>
+            <!-- clock face inside -->
+            <circle cx="30" cy="40" r="10" fill="#F5EEDB" stroke="#1F1B16" stroke-width="2.5"/>
+            <line x1="30" y1="40" x2="30" y2="34" stroke="#1F1B16" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="30" y1="40" x2="35" y2="40" stroke="#1F1B16" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="30" cy="40" r="1.5" fill="#1F1B16"/>
+          </svg>
+        </div>
+        <div class="card">
+          <div class="name">launchd/</div>
+          <div class="note">Plist templates for the three always-on jobs</div>
+        </div>
+      </div>
+
+      <!-- ============ SECRETS FOLDER ============ -->
+      <div class="node folder with-callout" style="--card-bg: #C99088; --tilt: -0.6deg;">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 64 64" width="60" height="60">
+            <g transform="translate(2,3)">
+              <rect x="10" y="26" width="44" height="32" rx="5" fill="#1F1B16" opacity="0.3"/>
+            </g>
+            <rect x="10" y="26" width="44" height="32" rx="5" fill="#C99088" stroke="#1F1B16" stroke-width="3.5"/>
+            <!-- shackle -->
+            <path d="M20 26 L20 18 A12 12 0 0 1 44 18 L44 26"
+                  fill="none" stroke="#1F1B16" stroke-width="3.5" stroke-linecap="round"/>
+            <!-- keyhole -->
+            <circle cx="32" cy="40" r="4" fill="#1F1B16"/>
+            <path d="M32 40 L32 50" stroke="#1F1B16" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="card">
+          <div class="name">secrets/</div>
+          <div class="note">OAuth + API keys <span style="opacity:0.6;">(700 perms · gitignored)</span></div>
+        </div>
+        <div class="callout callout-shh">
+          shhh…
+        </div>
+      </div>
+
+    </div><!-- /branch -->
+
+    <!-- ============ FOOTER ============ -->
+    <div class="footer">
+      <span>built for operators who live in</span>
+      <span class="stamp">claude code</span>
+      <span>·</span>
+      <span class="stamp b">v1.0</span>
+    </div>
+
+  </div>
+</body>
+</html>

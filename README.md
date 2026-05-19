@@ -3,7 +3,11 @@
 > Built for operators who live in Claude Code.
 
 <p align="center">
-  <img src="docs/architecture.svg" alt="claude-agent-os architecture" width="100%"/>
+  <img src="docs/cartoon-tree.png" alt="claude-agent-os — directory tour" width="100%"/>
+</p>
+
+<p align="center">
+  <sub>Live HTML source for the diagram: <a href="docs/cartoon-tree.html">docs/cartoon-tree.html</a> · open in a browser for the original hand-drawn rendering.</sub>
 </p>
 
 Your Claude Code session ends and the next one starts from zero — every prompt re-explains who you are, what you're working on, and what you tried yesterday. claude-agent-os is a directory-scoped persistent layer that runs three always-on agents and a hook layer underneath your Claude Code sessions, so context, routine, and safety rails survive between chats. Built for one operator, shaped so others can fork it.
