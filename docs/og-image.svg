@@ -1,59 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
-  <!-- Background -->
-  <rect width="1200" height="630" fill="#0a1730"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
 
-  <!-- Faint grid -->
-  <g stroke="#00d4ff" stroke-width="0.4" opacity="0.06">
-    <line x1="0" y1="105" x2="1200" y2="105"/>
-    <line x1="0" y1="210" x2="1200" y2="210"/>
-    <line x1="0" y1="315" x2="1200" y2="315"/>
-    <line x1="0" y1="420" x2="1200" y2="420"/>
-    <line x1="0" y1="525" x2="1200" y2="525"/>
-    <line x1="240" y1="0" x2="240" y2="630"/>
-    <line x1="480" y1="0" x2="480" y2="630"/>
-    <line x1="720" y1="0" x2="720" y2="630"/>
-    <line x1="960" y1="0" x2="960" y2="630"/>
+  <!-- Warm cream background -->
+  <rect width="1200" height="630" fill="#F5EEDB"/>
+
+  <!-- Decorative asterisks -->
+  <g opacity="0.5">
+    <g transform="translate(80,90)"><path d="M0,-22 L0,22 M-22,0 L22,0 M-15,-15 L15,15 M-15,15 L15,-15" stroke="#F2A6A0" stroke-width="4" stroke-linecap="round"/></g>
+    <g transform="translate(1110,140)"><path d="M0,-14 L0,14 M-14,0 L14,0 M-10,-10 L10,10 M-10,10 L10,-10" stroke="#F2A6A0" stroke-width="3" stroke-linecap="round"/></g>
+    <g transform="translate(60,550)"><path d="M0,-12 L0,12 M-12,0 L12,0 M-8,-8 L8,8 M-8,8 L8,-8" stroke="#F2A6A0" stroke-width="2.8" stroke-linecap="round"/></g>
+    <g transform="translate(1130,510)"><path d="M0,-16 L0,16 M-16,0 L16,0 M-11,-11 L11,11 M-11,11 L11,-11" stroke="#F2A6A0" stroke-width="3" stroke-linecap="round"/></g>
   </g>
 
-  <!-- Three stacked terminal windows (motif, right side) -->
-  <g>
-    <!-- back terminal -->
-    <rect x="760" y="120" width="360" height="190" rx="8" fill="#0a1730" stroke="#00d4ff" stroke-width="1" opacity="0.35"/>
-    <!-- middle terminal -->
-    <rect x="730" y="180" width="380" height="200" rx="8" fill="#0a1730" stroke="#00d4ff" stroke-width="1.2" opacity="0.6"/>
-    <!-- front terminal -->
-    <rect x="700" y="240" width="420" height="230" rx="8" fill="#0a1730" stroke="#00d4ff" stroke-width="1.8"/>
-    <rect x="700" y="240" width="420" height="28" rx="8" fill="#00d4ff" opacity="0.12"/>
-    <circle cx="720" cy="254" r="5" fill="#f4f4f0" opacity="0.55"/>
-    <circle cx="736" cy="254" r="5" fill="#f4f4f0" opacity="0.55"/>
-    <circle cx="752" cy="254" r="5" fill="#f4f4f0" opacity="0.55"/>
+  <!-- Left side: title + tagline -->
+  <g transform="translate(80,180)">
+    <!-- Accent line under wordmark -->
+    <rect x="0" y="110" width="120" height="6" rx="3" fill="#D67E78"/>
 
-    <text x="720" y="298" fill="#00d4ff" font-size="14">$ ls ~/.agent-os/</text>
-    <text x="720" y="324" fill="#f4f4f0" font-size="13" opacity="0.85">CLAUDE.md   MEMORY.md   BRAND.md</text>
-    <text x="720" y="346" fill="#f4f4f0" font-size="13" opacity="0.85">agents/     skills/     scripts/</text>
-    <text x="720" y="368" fill="#f4f4f0" font-size="13" opacity="0.85">hooks/      personas/   outbox/</text>
-    <text x="720" y="402" fill="#00d4ff" font-size="14">$ launchctl list | grep agent-os</text>
-    <text x="720" y="428" fill="#f4f4f0" font-size="13" opacity="0.85">io.agent-os.reply-handler</text>
-    <text x="720" y="450" fill="#f4f4f0" font-size="13" opacity="0.85">io.agent-os.calendar-booking</text>
+    <text x="0" y="0" fill="#1F1B16" font-size="78" font-weight="700" letter-spacing="-1.5">claude-</text>
+    <text x="0" y="86" fill="#1F1B16" font-size="78" font-weight="700" letter-spacing="-1.5">agent-os</text>
+
+    <text x="0" y="180" fill="#1F1B16" font-size="30" font-weight="600">Built for operators who live</text>
+    <text x="0" y="216" fill="#1F1B16" font-size="30" font-weight="600">in Claude Code.</text>
+
+    <text x="0" y="280" fill="#5C544A" font-size="18" opacity="0.78">always-on inbox agents · routing brain · safety hooks</text>
+
+    <!-- Pills row -->
+    <g transform="translate(0,310)">
+      <g>
+        <rect x="0" y="0" width="120" height="32" rx="16" fill="#EFA76B" stroke="#1F1B16" stroke-width="2"/>
+        <text x="60" y="21" fill="#1F1B16" font-size="13" font-weight="700" text-anchor="middle">replies</text>
+      </g>
+      <g transform="translate(132,0)">
+        <rect x="0" y="0" width="120" height="32" rx="16" fill="#94BD8E" stroke="#1F1B16" stroke-width="2"/>
+        <text x="60" y="21" fill="#1F1B16" font-size="13" font-weight="700" text-anchor="middle">bookings</text>
+      </g>
+      <g transform="translate(264,0)">
+        <rect x="0" y="0" width="140" height="32" rx="16" fill="#D67E78" stroke="#1F1B16" stroke-width="2"/>
+        <text x="70" y="21" fill="#F5EEDB" font-size="13" font-weight="700" text-anchor="middle">morning brief</text>
+      </g>
+    </g>
   </g>
 
-  <!-- Text block (left) -->
-  <g>
-    <text x="80" y="180" fill="#f4f4f0" font-size="14" letter-spacing="3" opacity="0.6">OPEN SOURCE · MIT</text>
+  <!-- Right side: stacked terminal-window cards as architecture motif -->
+  <g transform="translate(720,140)">
+    <!-- Card 3 (back) - golden routing brain -->
+    <g transform="translate(60,0)">
+      <rect x="0" y="0" width="380" height="100" rx="14" fill="#E8C26B" stroke="#1F1B16" stroke-width="2"/>
+      <text x="22" y="32" fill="#1F1B16" font-size="16" font-weight="700">CLAUDE.md — routing brain</text>
+      <text x="22" y="58" fill="#1F1B16" font-size="12" opacity="0.78" font-family="ui-monospace, 'SF Mono', monospace">intent → skill · persona · agent</text>
+      <text x="22" y="80" fill="#1F1B16" font-size="11" opacity="0.65" font-family="ui-monospace, 'SF Mono', monospace">~/.agent-os/CLAUDE.md</text>
+    </g>
 
-    <text x="80" y="270" fill="#f4f4f0" font-size="64" font-weight="600">claude-agent-os</text>
+    <!-- Card 2 (middle) - green calendar -->
+    <g transform="translate(30,120)">
+      <rect x="0" y="0" width="380" height="100" rx="14" fill="#94BD8E" stroke="#1F1B16" stroke-width="2"/>
+      <text x="22" y="32" fill="#1F1B16" font-size="16" font-weight="700">Calendar Booking</text>
+      <text x="22" y="58" fill="#1F1B16" font-size="12" opacity="0.82">prep docs · loop closure · 15 min</text>
+      <g transform="translate(280,16)">
+        <rect x="0" y="0" width="80" height="22" rx="11" fill="#1F1B16"/>
+        <text x="40" y="15" fill="#F5EEDB" font-size="10" font-weight="600" text-anchor="middle" font-family="ui-monospace, 'SF Mono', monospace">15 min</text>
+      </g>
+    </g>
 
-    <!-- cyan accent underline -->
-    <rect x="80" y="290" width="80" height="3" fill="#00d4ff"/>
+    <!-- Card 1 (front) - coral morning brief -->
+    <g transform="translate(0,240)">
+      <rect x="0" y="0" width="380" height="100" rx="14" fill="#D67E78" stroke="#1F1B16" stroke-width="2"/>
+      <text x="22" y="32" fill="#1F1B16" font-size="16" font-weight="700">Morning Brief</text>
+      <text x="22" y="58" fill="#F5EEDB" font-size="12" opacity="0.95">top-3 priorities · pipeline state</text>
+      <g transform="translate(260,16)">
+        <rect x="0" y="0" width="100" height="22" rx="11" fill="#1F1B16"/>
+        <text x="50" y="15" fill="#F5EEDB" font-size="10" font-weight="600" text-anchor="middle" font-family="ui-monospace, 'SF Mono', monospace">Mon–Fri 7AM</text>
+      </g>
+    </g>
+  </g>
 
-    <text x="80" y="360" fill="#f4f4f0" font-size="26" opacity="0.92">Built for operators who live</text>
-    <text x="80" y="394" fill="#f4f4f0" font-size="26" opacity="0.92">in Claude Code.</text>
-
-    <text x="80" y="450" fill="#f4f4f0" font-size="16" opacity="0.6">always-on inbox agents · routing brain · safety hooks</text>
+  <!-- Friendly terminal mascot above right cards -->
+  <g transform="translate(990,40)">
+    <rect x="0" y="0" width="80" height="60" rx="10" fill="#1F1B16"/>
+    <rect x="6" y="6" width="68" height="48" rx="6" fill="#F5EEDB"/>
+    <circle cx="22" cy="26" r="3" fill="#1F1B16"/>
+    <circle cx="58" cy="26" r="3" fill="#1F1B16"/>
+    <path d="M28,40 Q40,46 52,40" stroke="#1F1B16" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <rect x="32" y="60" width="16" height="6" fill="#1F1B16"/>
+    <rect x="20" y="66" width="40" height="3" rx="1.5" fill="#1F1B16"/>
   </g>
 
   <!-- Footer -->
-  <text x="80" y="570" fill="#00d4ff" font-size="14">→ github.com/beckwith930-star/claude-agent-os</text>
-  <text x="1120" y="570" fill="#f4f4f0" font-size="12" text-anchor="end" opacity="0.5">@beckwith930-star</text>
+  <g transform="translate(80,575)">
+    <text x="0" y="0" fill="#5C544A" font-size="16" opacity="0.78" font-family="ui-monospace, 'SF Mono', monospace">github.com/beckwith930-star/claude-agent-os</text>
+    <text x="1040" y="0" fill="#5C544A" font-size="14" opacity="0.65" text-anchor="end">MIT licensed · macOS</text>
+  </g>
+
 </svg>
