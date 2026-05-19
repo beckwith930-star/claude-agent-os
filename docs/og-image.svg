@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#0a1730"/>
+
+  <!-- Faint grid -->
+  <g stroke="#00d4ff" stroke-width="0.4" opacity="0.06">
+    <line x1="0" y1="105" x2="1200" y2="105"/>
+    <line x1="0" y1="210" x2="1200" y2="210"/>
+    <line x1="0" y1="315" x2="1200" y2="315"/>
+    <line x1="0" y1="420" x2="1200" y2="420"/>
+    <line x1="0" y1="525" x2="1200" y2="525"/>
+    <line x1="240" y1="0" x2="240" y2="630"/>
+    <line x1="480" y1="0" x2="480" y2="630"/>
+    <line x1="720" y1="0" x2="720" y2="630"/>
+    <line x1="960" y1="0" x2="960" y2="630"/>
+  </g>
+
+  <!-- Three stacked terminal windows (motif, right side) -->
+  <g>
+    <!-- back terminal -->
+    <rect x="760" y="120" width="360" height="190" rx="8" fill="#0a1730" stroke="#00d4ff" stroke-width="1" opacity="0.35"/>
+    <!-- middle terminal -->
+    <rect x="730" y="180" width="380" height="200" rx="8" fill="#0a1730" stroke="#00d4ff" stroke-width="1.2" opacity="0.6"/>
+    <!-- front terminal -->
+    <rect x="700" y="240" width="420" height="230" rx="8" fill="#0a1730" stroke="#00d4ff" stroke-width="1.8"/>
+    <rect x="700" y="240" width="420" height="28" rx="8" fill="#00d4ff" opacity="0.12"/>
+    <circle cx="720" cy="254" r="5" fill="#f4f4f0" opacity="0.55"/>
+    <circle cx="736" cy="254" r="5" fill="#f4f4f0" opacity="0.55"/>
+    <circle cx="752" cy="254" r="5" fill="#f4f4f0" opacity="0.55"/>
+
+    <text x="720" y="298" fill="#00d4ff" font-size="14">$ ls ~/.agent-os/</text>
+    <text x="720" y="324" fill="#f4f4f0" font-size="13" opacity="0.85">CLAUDE.md   MEMORY.md   BRAND.md</text>
+    <text x="720" y="346" fill="#f4f4f0" font-size="13" opacity="0.85">agents/     skills/     scripts/</text>
+    <text x="720" y="368" fill="#f4f4f0" font-size="13" opacity="0.85">hooks/      personas/   outbox/</text>
+    <text x="720" y="402" fill="#00d4ff" font-size="14">$ launchctl list | grep agent-os</text>
+    <text x="720" y="428" fill="#f4f4f0" font-size="13" opacity="0.85">io.agent-os.reply-handler</text>
+    <text x="720" y="450" fill="#f4f4f0" font-size="13" opacity="0.85">io.agent-os.calendar-booking</text>
+  </g>
+
+  <!-- Text block (left) -->
+  <g>
+    <text x="80" y="180" fill="#f4f4f0" font-size="14" letter-spacing="3" opacity="0.6">OPEN SOURCE · MIT</text>
+
+    <text x="80" y="270" fill="#f4f4f0" font-size="64" font-weight="600">claude-agent-os</text>
+
+    <!-- cyan accent underline -->
+    <rect x="80" y="290" width="80" height="3" fill="#00d4ff"/>
+
+    <text x="80" y="360" fill="#f4f4f0" font-size="26" opacity="0.92">A persistent operating layer</text>
+    <text x="80" y="394" fill="#f4f4f0" font-size="26" opacity="0.92">for Claude Code.</text>
+
+    <text x="80" y="450" fill="#f4f4f0" font-size="16" opacity="0.6">always-on inbox agents · routing brain · safety hooks</text>
+  </g>
+
+  <!-- Footer -->
+  <text x="80" y="570" fill="#00d4ff" font-size="14">→ github.com/beckwith930-star/claude-agent-os</text>
+  <text x="1120" y="570" fill="#f4f4f0" font-size="12" text-anchor="end" opacity="0.5">@beckwith930-star</text>
+</svg>

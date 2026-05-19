@@ -1,0 +1,46 @@
+# Secrets — never commit
+secrets/
+*.pem
+*.key
+gmail-credentials.json
+gmail-oauth-keys.json
+hunter-api-key.txt
+.env
+.env.*
+
+# Personal state — your campaign log, queues, and outbox stay local
+MEMORY.md
+outbox/
+clients/
+prospects/
+inbox-queue*.jsonl
+bookings-queue*.jsonl
+
+# Runtime artifacts
+.reply-fetcher*.json
+.booking-fetcher*.json
+.morning-brief*.log
+*.log
+.*-stderr.log
+.*-stdout.log
+
+# OS
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.venv/
+venv/

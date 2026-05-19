@@ -1,0 +1,34 @@
+{
+  "default_model": "opus",
+  "permissions": {
+    "file_write": true,
+    "web_search": true,
+    "gmail_mcp": true,
+    "github_cli": true
+  },
+  "hooks": {
+    "pre_tool_use": "hooks/pre-tool-use/block-dangerous-commands.js",
+    "post_tool_use": "hooks/post-tool-use/dispatcher.js",
+    "notification": "hooks/notification/notify-permission.js"
+  },
+  "safety": {
+    "drafts_only_for_outbound": true,
+    "confirm_before_destructive_writes": true,
+    "block_force_push_to_main": true,
+    "block_rm_rf": true
+  },
+  "memory": {
+    "brand": "BRAND.md",
+    "voice": "SOUL.md",
+    "campaign_log": "MEMORY.md",
+    "router": "CLAUDE.md",
+    "connections": "CONNECTIONS.md"
+  },
+  "connections": {
+    "enforce_auth_boundary": true,
+    "namespace": "<NS>",
+    "gmail_mcp_server_name": "gmail-<NS>",
+    "gmail_mcp_scopes": ["gmail.modify", "gmail.settings.basic"],
+    "github_account": "<YOUR_GITHUB>"
+  }
+}
