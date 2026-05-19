@@ -47,8 +47,8 @@
     <!-- cyan accent underline -->
     <rect x="80" y="290" width="80" height="3" fill="#00d4ff"/>
 
-    <text x="80" y="360" fill="#f4f4f0" font-size="26" opacity="0.92">A persistent operating layer</text>
-    <text x="80" y="394" fill="#f4f4f0" font-size="26" opacity="0.92">for Claude Code.</text>
+    <text x="80" y="360" fill="#f4f4f0" font-size="26" opacity="0.92">Built for operators who live</text>
+    <text x="80" y="394" fill="#f4f4f0" font-size="26" opacity="0.92">in Claude Code.</text>
 
     <text x="80" y="450" fill="#f4f4f0" font-size="16" opacity="0.6">always-on inbox agents · routing brain · safety hooks</text>
   </g>

@@ -1,23 +1,23 @@
 # claude-agent-os
 
-> A persistent operating layer for Claude Code — always-on, directory-scoped.
+> Built for operators who live in Claude Code.
 
 <p align="center">
   <img src="docs/architecture.svg" alt="claude-agent-os architecture" width="100%"/>
 </p>
 
-`claude-agent-os` is a directory that sits at `~/.agent-os/` and gives Claude Code the persistence it doesn't have on its own: a routing brain that maps intent to skills and personas, three background agents wired to launchd that process your inbox and calendar on a cadence, and a hook layer that blocks dangerous commands before they run. Output lands as drafts you approve — nothing sends, deletes, or pushes without you. Built for one operator, sharable to many.
+Your Claude Code session ends and the next one starts from zero — every prompt re-explains who you are, what you're working on, and what you tried yesterday. claude-agent-os is a directory-scoped persistent layer that runs three always-on agents and a hook layer underneath your Claude Code sessions, so context, routine, and safety rails survive between chats. Built for one operator, shaped so others can fork it.
 
 ## Who this is for
 
-- **Solo founders and operators** who already live in Claude Code and want one source of truth across sessions instead of re-priming every chat.
-- **AEs and GTM engineers** who need inbox + calendar + outbound to behave like a system, not three disconnected tools.
-- **Devs** who prefer their automation layer in plain files on disk (markdown, Python, plist) rather than a hosted dashboard.
+- You spend most of your working day inside Claude Code and feel the cost of re-priming every session.
+- You want recurring agent work (morning briefs, reply triage, calendar pulls) to happen on a cadence, not on demand.
+- You'd rather read a hook file than trust a black-box guardrail.
 
 ## Who this is NOT for
 
-- Teams looking for a managed SaaS with a UI, SSO, and a CSM — this is a local-first OSS project, not a vendor.
-- Anyone who wants agents that send, post, or commit without human review — every output here is a draft by design, and that's not a toggle.
+- You use Claude Code occasionally — the always-on launchd jobs cost more than they return at low volume.
+- You're on Linux or Windows today — the install assumes macOS and launchd.
 
 ---
 

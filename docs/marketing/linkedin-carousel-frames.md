@@ -1,119 +1,48 @@
-# LinkedIn carousel — claude-agent-os launch
+# LinkedIn carousel — claude-agent-os
 
-Five frames, 1080x1350 each. Palette: dark navy `#0a1730` background, cyan `#00d4ff` accent (sparing), warm white `#f4f4f0` text. Monospace where it reads as code (`ui-monospace` / `SFMono-Regular` / `Menlo`); clean sans (system-ui) for body. No emojis. No exclamation points.
-
-A single thin cyan rule runs across the top of every frame at y≈100 — visual continuity. Slide number `01 / 05` etc. lives in the top-right corner in 14pt mono at 50% opacity. `github.com/beckwith930-star/claude-agent-os` runs along the bottom in 13pt mono on every frame.
+5 frames, 1080 x 1350 each. Visual language: Linear-style flat geometric, near-black background (#0B0E14), one accent color (#E2FF5C) used sparingly. System-ui or monospace fonts only. No 3D, no isometric scenes, no stock illustration, no emoji in image copy.
 
 ---
 
-## Frame 1 — Title
+## Frame 1 — Identity
 
-**Layout:** Centered. Lots of negative space.
-
-**Title (top third, 72pt, warm white):**
-`what is claude-agent-os?`
-
-**Subtitle (below, 28pt, 80% opacity):**
-A persistent operating layer for Claude Code.
-
-**Visual element (bottom third):** ASCII directory tree, 18pt monospace, cyan-tinted, left-aligned, centered horizontally as a block:
-
-```
-~/.agent-os/
-├── CLAUDE.md
-├── MEMORY.md
-├── agents/
-├── skills/
-├── hooks/
-└── scripts/
-```
-
-**Footer line:** `open source · MIT · 2026`
+- **Title:** The persistent layer for Claude Code.
+- **Body:** Three always-on agents. Two safety hooks. One memory file. MIT licensed.
+- **Visual motif:** A single horizontal line dividing the frame into thirds. Upper third holds the title in tight kerning. Lower third holds the body in monospace. One small accent-color square sits at the line's midpoint — the only color in the frame.
+- **Designer note:** Cursor-style direct identity claim. Resist the urge to add a logo lockup or a sub-tagline; the line and the square carry the composition.
 
 ---
 
-## Frame 2 — The problem
+## Frame 2 — Problem
 
-**Title (32pt, warm white):**
-`Chat sessions = amnesia.`
-
-**Body (22pt, ~70% opacity, 3 short paragraphs separated by line breaks):**
-
-You open Claude Code. You explain your stack, your voice, your last decision, your three open threads.
-
-You close the tab. Tomorrow, you do it again.
-
-Multiply by 200 working days a year.
-
-**Visual element (right side or bottom):** Two terminal windows side-by-side, identical contents, both showing `$ claude` followed by `> who am I again?`. The repetition is the joke.
-
-**Bottom line (16pt mono, cyan):**
-`# the tool is powerful. the session is disposable.`
+- **Title:** Every Claude Code session starts at zero.
+- **Body:** You re-explain who you are, what you're building, and yesterday's decisions. The chat window holds the state. The chat window is disposable.
+- **Visual motif:** A horizontal row of seven identical small squares, evenly spaced. The leftmost square is filled in accent color; the other six are outline-only. Reads as "session 1, then six blanks."
+- **Designer note:** The metaphor is loss across sessions. Keep the squares uniform — no animation, no fade gradient. Cold geometric repetition is the point.
 
 ---
 
-## Frame 3 — The architecture
+## Frame 3 — Architecture
 
-**Title (32pt, warm white):**
-`Three always-on agents.`
-
-**Body (20pt, intro line):**
-Wired to launchd. Runs whether you're at the keyboard or not.
-
-**Visual element — a three-row table, monospace, generous row spacing:**
-
-```
-reply-handler      every 30m       classify inbox · draft replies
-calendar-booking   every 15m       watch new bookings · write prep
-morning-brief      Mon–Fri 7AM     top-3 priorities, one email
-```
-
-Row dividers are 1px cyan at 20% opacity. Cadence column is highlighted in cyan.
-
-**Bottom line (16pt mono, 70% opacity):**
-`# all output lands as drafts. you pull every send trigger.`
+- **Title:** Three agents. Three cadences.
+- **Body:** Reply Handler — every 30 min. Calendar Booking — every 15 min. Morning Brief — Mon–Fri 7AM.
+- **Visual motif:** Three horizontal bars stacked vertically, left-aligned, each labeled with its agent name on the left and its cadence on the right in monospace. Bar widths differ — shortest is Calendar (15), longest is Morning Brief (the weekly anchor). Bars use the accent color at 40% opacity; labels are white.
+- **Designer note:** Treat this like a Gantt chart with the dates stripped. The bar-length ratio communicates cadence without a chart axis.
 
 ---
 
-## Frame 4 — The hook layer
+## Frame 4 — Hook layer
 
-**Title (32pt, warm white):**
-`Safety isn't a feature. It's enforced.`
-
-**Body (22pt, two short paragraphs):**
-
-A pre-tool-use hook intercepts every command before Claude runs it. Dangerous shell, force-pushes, writes outside the scope — blocked at the gate.
-
-A post-tool-use hook auto-stages git changes so nothing edits silently. You see every diff.
-
-**Visual element (center):** A schematic — a Claude shape on the left, a hook gate (cyan bracket `[ ]`) in the middle, the filesystem on the right. Arrows pass through the bracket. One arrow is red and blocked at the bracket; a small label reads `rm -rf ~` crossed out.
-
-**Bottom line (16pt mono):**
-`# pre-tool-use · post-tool-use · directory-scoped`
+- **Title:** Safety as architecture, not a setting.
+- **Body:** Pre-tool-use hook refuses destructive shell commands before they run. Post-tool-use hook routes every event to logs and memory.
+- **Visual motif:** Two horizontal rectangles, one above the other, with a narrow gap between them. Between the rectangles, a small accent-color diamond sits centered — the tool call passing through. Above and below rectangles are labeled "pre-tool-use" and "post-tool-use" in monospace.
+- **Designer note:** The unsexy frame. The diamond is the only ornament — no shield icons, no lock icons, no checkmarks. The geometry is the argument.
 
 ---
 
-## Frame 5 — 60-second install
+## Frame 5 — Install
 
-**Title (44pt, warm white, centered):**
-`Clone. Run install.sh. Done.`
-
-**Body (24pt, centered):**
-60 seconds to a persistent Claude Code layer.
-
-**Visual element — a code block, 22pt monospace, cyan prompt characters:**
-
-```
-$ git clone github.com/beckwith930-star/claude-agent-os ~/.agent-os
-$ cd ~/.agent-os && ./install.sh
-$ claude
-```
-
-Below the code block, in 16pt mono, 70% opacity:
-`# launchd agents installed · hooks registered · routing brain live`
-
-**CTA line (28pt, cyan, centered, bottom-quarter):**
-`→ github.com/beckwith930-star/claude-agent-os`
-
-**Footer (16pt, 60% opacity):**
-Built for one operator. Sharable to many. MIT.
+- **Title:** Install in 60 seconds.
+- **Body:** curl -fsSL https://raw.githubusercontent.com/beckwith930-star/claude-agent-os/main/install.sh | bash
+- **Visual motif:** Full-frame monospace block with the curl command set in white on the near-black background. A single accent-color `→` arrow sits in the upper-left corner. Repo URL `github.com/beckwith930-star/claude-agent-os` runs along the bottom edge in smaller monospace.
+- **Designer note:** Vercel-style install card. The command IS the visual — do not wrap it in a fake terminal chrome or add a copy-to-clipboard icon. One line, one arrow, one URL.
